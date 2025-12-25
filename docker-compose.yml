@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  api:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    container_name: bcscanner-api
+    image: bcscanner-api
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api.py:/app/api.py
+    restart: unless-stopped
+    environment:
+      - FLASK_ENV=development
+      # - FLASK_ENV=production
+      - LOG_LEVEL=INFO
+      - DB_HOST=192.168.0.10
+      - DB_USER=barcodescanner
+      - DB_PWD=superPassword
+      - DB_NAME=somedb.tableitems
+    network_mode: bridge
